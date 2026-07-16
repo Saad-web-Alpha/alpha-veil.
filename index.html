@@ -430,6 +430,18 @@ footer{border-top:1px solid var(--border);padding:60px 5% 30px;margin-top:60px;}
   font-size:14px;font-weight:500;font-family:'Inter',sans-serif;transition:box-shadow .2s ease,background .2s ease;
 }
 .google-btn:hover{box-shadow:0 1px 8px rgba(0,0,0,.2);background:#f8f8f8;}
+#searchInput{
+  width:100%;padding:14px 16px;background:var(--glass);border:1px solid var(--border);border-radius:4px;
+  color:var(--white);font-size:15px;font-family:inherit;margin-bottom:14px;
+}
+#searchResults{max-height:340px;overflow-y:auto;}
+.search-result-item{
+  padding:13px 4px;border-bottom:1px solid var(--border);cursor:pointer;transition:background .2s ease;
+}
+.search-result-item:hover{background:var(--glass);}
+.sr-type{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--dark-red);margin-bottom:4px;}
+.sr-title{font-size:14px;color:var(--white);font-weight:500;}
+.search-empty{color:var(--grey);font-size:14px;text-align:center;padding:26px 0;}
 
 /* NOTIFICATION TOAST */
 #toast{
@@ -490,6 +502,7 @@ footer{border-top:1px solid var(--border);padding:60px 5% 30px;margin-top:60px;}
   <a data-page="about">About</a>
   <a data-page="courses">Courses</a>
   <a data-page="videos">Videos</a>
+  <a data-page="ebooks">eBooks</a>
   <a data-page="dashboard">Dashboard</a>
   <a data-page="membership">Membership</a>
   <a data-page="settings">Settings</a>
@@ -509,13 +522,14 @@ footer{border-top:1px solid var(--border);padding:60px 5% 30px;margin-top:60px;}
       <a data-page="about">About</a>
       <a data-page="courses">Courses</a>
       <a data-page="videos">Videos</a>
+      <a data-page="ebooks">eBooks</a>
       <a data-page="dashboard">Dashboard</a>
       <a data-page="membership">Membership</a>
       <a data-page="faq">FAQ</a>
       <a data-page="contact">Contact</a>
     </nav>
     <div class="header-right">
-      <div class="icon-btn" title="Search">
+      <div class="icon-btn" id="searchIconBtn" title="Search">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#BEBEBE" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
       </div>
       <a class="login-btn" id="profileNavBtn" data-page="dashboard">Profile</a>
@@ -595,6 +609,24 @@ footer{border-top:1px solid var(--border);padding:60px 5% 30px;margin-top:60px;}
         <h2>Videos</h2>
       </div>
       <div class="video-grid" id="videoGrid"></div>
+    </div>
+  </section>
+
+  <!-- EBOOKS -->
+  <section class="page" id="page-ebooks">
+    <div class="container">
+      <div class="section-title">
+        <div class="eyebrow">The Library</div>
+        <h2>eBooks</h2>
+      </div>
+      <div class="course-grid" id="ebookGrid"></div>
+    </div>
+  </section>
+
+  <!-- EBOOK READER -->
+  <section class="page" id="page-ebookReader">
+    <div class="container" style="max-width:780px;padding-bottom:100px;">
+      <div id="ebookReaderBody"></div>
     </div>
   </section>
 
@@ -747,6 +779,15 @@ footer{border-top:1px solid var(--border);padding:60px 5% 30px;margin-top:60px;}
   </div>
 </div>
 
+<!-- SEARCH MODAL -->
+<div id="searchModal" class="modal-overlay">
+  <div class="modal-box" style="max-width:520px;text-align:left;">
+    <input id="searchInput" type="text" placeholder="Search courses, videos, FAQ..." autocomplete="off">
+    <div id="searchResults"></div>
+    <button id="closeSearchBtn" class="btn btn-outline" style="width:100%;margin-top:16px;">Close</button>
+  </div>
+</div>
+
 <!-- SIGN IN MODAL -->
 <div id="signinModal" class="modal-overlay">
   <div class="modal-box">
@@ -794,7 +835,7 @@ const features = [
   {icon:'book',title:'Courses',desc:'Structured lessons',page:'courses'},
   {icon:'play',title:'Videos',desc:'Curated teachings',page:'videos'},
   {icon:'feather',title:'Blog',desc:'Deeper essays',page:'home'},
-  {icon:'layers',title:'eBooks',desc:'The full library',page:'home'},
+  {icon:'layers',title:'eBooks',desc:'The full library',page:'ebooks'},
   {icon:'target',title:'AI Quiz',desc:'Test your mastery',page:'home'},
   {icon:'users',title:'Community',desc:'Join the circle',page:'home'},
 ];
@@ -1480,6 +1521,62 @@ function setOwnerPreview(on){
 }
 document.getElementById('ownerOnBtn').addEventListener('click',()=>setOwnerPreview(true));
 document.getElementById('ownerOffBtn').addEventListener('click',()=>setOwnerPreview(false));
+
+/* ============ SEARCH ============ */
+let searchIndex = [];
+function buildSearchIndex(){
+  searchIndex = [];
+  courses.forEach(c=> searchIndex.push({
+    type:'Course', title:c.title, sub:c.desc,
+    action:()=>{ closeSearch(); openCourseDetail(c.id); }
+  }));
+  videos.forEach(v=> searchIndex.push({
+    type:'Video', title:v.title, sub:`${v.views} · ${v.age}`,
+    action:()=>{ closeSearch(); openSubscribeModal(v.id); }
+  }));
+  faqs.forEach(f=> searchIndex.push({
+    type:'FAQ', title:f.q, sub:f.a,
+    action:()=>{ closeSearch(); goToPage('faq'); }
+  }));
+}
+function performSearch(query){
+  const q = query.trim().toLowerCase();
+  const resultsEl = document.getElementById('searchResults');
+  if(!q){
+    resultsEl.innerHTML = '<p class="search-empty">Start typing to search Alpha Veil...</p>';
+    return;
+  }
+  const matches = searchIndex.filter(item =>
+    item.title.toLowerCase().includes(q) || (item.sub && item.sub.toLowerCase().includes(q))
+  );
+  if(matches.length===0){
+    resultsEl.innerHTML = '<p class="search-empty">No results found</p>';
+    return;
+  }
+  resultsEl.innerHTML = matches.map((m,i)=>`
+    <div class="search-result-item" data-idx="${i}">
+      <div class="sr-type">${m.type}</div>
+      <div class="sr-title">${m.title}</div>
+    </div>`).join('');
+  document.querySelectorAll('.search-result-item').forEach(el=>{
+    el.addEventListener('click', ()=> matches[parseInt(el.getAttribute('data-idx'))].action());
+  });
+}
+function closeSearch(){
+  document.getElementById('searchModal').classList.remove('show');
+}
+document.getElementById('searchIconBtn').addEventListener('click', ()=>{
+  buildSearchIndex();
+  document.getElementById('searchInput').value='';
+  performSearch('');
+  document.getElementById('searchModal').classList.add('show');
+  setTimeout(()=>document.getElementById('searchInput').focus(), 150);
+});
+document.getElementById('searchInput').addEventListener('input', (e)=> performSearch(e.target.value));
+document.getElementById('closeSearchBtn').addEventListener('click', closeSearch);
+document.getElementById('searchModal').addEventListener('click',(e)=>{
+  if(e.target.id==='searchModal') closeSearch();
+});
 
 /* ============ INIT ============ */
 renderFeatures();
