@@ -1,0 +1,1489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Alpha Veil — Unlock the Hidden Psychology of Success</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<style>
+:root{
+  --bg:#090909;
+  --bg2:#111111;
+  --dark-red:#8B0000;
+  --accent-red:#A0001C;
+  --white:#FFFFFF;
+  --pure-white:#FFFFFF;
+  --grey:#BEBEBE;
+  --border:rgba(255,255,255,.08);
+  --glass:rgba(255,255,255,.03);
+  --header-glass:rgba(9,9,9,.7);
+  --border-strong:rgba(255,255,255,.3);
+}
+body.light-theme{
+  --bg:#f5f3f1;
+  --bg2:#ffffff;
+  --white:#141414;
+  --grey:#5a5654;
+  --border:rgba(0,0,0,.1);
+  --glass:rgba(0,0,0,.03);
+  --header-glass:rgba(255,255,255,.75);
+  --border-strong:rgba(0,0,0,.28);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  background:var(--bg);
+  color:var(--white);
+  font-family:'Inter',sans-serif;
+  overflow-x:hidden;
+  min-height:100vh;
+  transition:background .4s ease, color .4s ease;
+}
+h1,h2,h3,h4,.logo-text,.brand{font-family:'Space Grotesk',sans-serif;}
+::selection{background:var(--dark-red);color:var(--white);}
+a{color:inherit;text-decoration:none;}
+a[data-page],a[data-dash]{cursor:pointer;}
+button{font-family:inherit;cursor:pointer;}
+::-webkit-scrollbar{width:8px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:#2a0000;border-radius:4px;}
+
+/* AMBIENT BACKGROUND RED ACCENTS — light theme only */
+.ambient-blobs{
+  position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;
+  opacity:0;transition:opacity .6s ease;
+}
+body.light-theme .ambient-blobs{opacity:.45;}
+.blob{
+  position:absolute;border-radius:50%;filter:blur(70px);
+  background:radial-gradient(circle, rgba(139,0,0,.14), rgba(160,0,28,.06) 55%, transparent 75%);
+}
+.b1{width:420px;height:420px;top:-8%;left:-10%;animation:floatA 24s ease-in-out infinite;}
+.b2{width:360px;height:360px;top:35%;right:-12%;animation:floatB 28s ease-in-out infinite;}
+.b3{width:320px;height:320px;bottom:-12%;left:15%;animation:floatC 22s ease-in-out infinite;}
+.b4{width:260px;height:260px;top:8%;right:20%;animation:floatB 32s ease-in-out infinite reverse;}
+.b5{width:300px;height:300px;bottom:10%;right:35%;animation:floatA 26s ease-in-out infinite reverse;}
+@keyframes floatA{
+  0%,100%{transform:translate(0,0) scale(1);}
+  50%{transform:translate(70px,90px) scale(1.15);}
+}
+@keyframes floatB{
+  0%,100%{transform:translate(0,0) scale(1);}
+  50%{transform:translate(-80px,-60px) scale(1.1);}
+}
+@keyframes floatC{
+  0%,100%{transform:translate(0,0) scale(1);}
+  50%{transform:translate(60px,-70px) scale(1.2);}
+}
+
+/* ===== SPLASH SCREEN ===== */
+#splash{
+  position:fixed;inset:0;background:#000;z-index:9999;
+  display:flex;align-items:center;justify-content:center;flex-direction:column;
+  transition:opacity .6s ease;
+}
+.splash-logo{display:flex;align-items:baseline;gap:2px;}
+.letter{
+  font-size:min(22vw,180px);font-weight:700;opacity:0;transform:scale(.6);
+  display:inline-block;filter:blur(4px);
+}
+.letter.a{
+  background:linear-gradient(180deg,#fff,#8a8a8a);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:letterIn 1.1s cubic-bezier(.19,1,.22,1) forwards;
+  text-shadow:0 0 40px rgba(255,255,255,.25);
+}
+.letter.v{
+  color:var(--dark-red);
+  animation:letterIn 1.1s cubic-bezier(.19,1,.22,1) forwards;
+  animation-delay:.55s;
+  text-shadow:0 0 50px rgba(139,0,0,.6);
+}
+@keyframes letterIn{
+  0%{opacity:0;transform:scale(.6);filter:blur(4px);}
+  100%{opacity:1;transform:scale(1);filter:blur(0);}
+}
+.splash-brand{
+  margin-top:18px;font-size:15px;letter-spacing:8px;font-weight:400;color:var(--grey);
+  opacity:0;animation:fadeUp 1s ease forwards;animation-delay:1.3s;
+  text-transform:uppercase;
+}
+@keyframes fadeUp{
+  0%{opacity:0;transform:translateY(10px);}
+  100%{opacity:1;transform:translateY(0);}
+}
+.splash-btn{
+  margin-top:46px;padding:14px 38px;border:1px solid rgba(255,255,255,.4);
+  background:transparent;color:var(--pure-white);font-size:13px;letter-spacing:3px;
+  text-transform:uppercase;border-radius:2px;opacity:0;
+  animation:fadeUp .8s ease forwards;animation-delay:2.1s;
+  transition:all .4s ease;position:relative;overflow:hidden;
+}
+.splash-btn:hover{
+  background:var(--dark-red);border-color:var(--dark-red);
+  box-shadow:0 0 30px rgba(139,0,0,.7);
+}
+
+/* ===== LOADING SCREEN ===== */
+#loading{
+  position:fixed;inset:0;background:#000;z-index:9998;
+  display:none;align-items:center;justify-content:center;flex-direction:column;
+}
+#loading canvas{position:absolute;inset:0;width:100%;height:100%;opacity:.5;}
+.loading-inner{position:relative;z-index:2;text-align:center;}
+.loading-logo{font-size:64px;font-weight:700;letter-spacing:2px;}
+.loading-logo .a{color:var(--pure-white);}
+.loading-logo .v{color:var(--dark-red);}
+.loading-bar{
+  width:220px;height:1px;background:rgba(255,255,255,.15);margin:28px auto 18px;
+  position:relative;overflow:hidden;
+}
+.loading-bar::after{
+  content:'';position:absolute;left:-40%;top:0;height:100%;width:40%;
+  background:linear-gradient(90deg,transparent,var(--dark-red),transparent);
+  animation:loadSweep 1.4s ease-in-out infinite;
+}
+@keyframes loadSweep{
+  0%{left:-40%;} 100%{left:100%;}
+}
+.loading-text{font-size:12px;letter-spacing:4px;color:var(--grey);text-transform:uppercase;}
+
+/* ===== APP ===== */
+#app{display:none;opacity:0;transition:opacity .7s ease;}
+#app.reveal{opacity:1;}
+
+/* HEADER */
+header{
+  position:fixed;top:0;left:0;right:0;z-index:500;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:22px 5%;transition:all .4s ease;
+}
+header.scrolled{
+  background:var(--header-glass);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);padding:14px 5%;
+}
+.brand{display:flex;align-items:center;gap:10px;cursor:pointer;}
+.brand-mark{font-size:22px;font-weight:700;}
+.brand-mark .a{color:var(--white);}
+.brand-mark .v{color:var(--dark-red);}
+.brand-name{font-size:14px;letter-spacing:3px;text-transform:uppercase;color:var(--grey);}
+.brand:hover .brand-mark{text-shadow:0 0 20px rgba(139,0,0,.6);}
+
+nav.main-nav{display:flex;gap:34px;}
+nav.main-nav a{
+  font-size:13px;letter-spacing:1px;color:var(--grey);position:relative;padding:4px 0;
+  transition:color .3s;
+}
+nav.main-nav a:hover, nav.main-nav a.active{color:var(--white);}
+nav.main-nav a::after{
+  content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;background:var(--dark-red);
+  transition:width .3s;
+}
+nav.main-nav a:hover::after, nav.main-nav a.active::after{width:100%;}
+
+.header-right{display:flex;align-items:center;gap:20px;}
+.icon-btn{
+  width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  background:var(--glass);border:1px solid var(--border);transition:all .3s;
+}
+.icon-btn:hover{border-color:var(--dark-red);box-shadow:0 0 14px rgba(139,0,0,.4);}
+.login-btn{
+  padding:9px 22px;border:1px solid var(--border-strong);border-radius:2px;font-size:12px;
+  letter-spacing:2px;text-transform:uppercase;transition:all .3s;
+}
+.login-btn:hover{background:var(--dark-red);border-color:var(--dark-red);}
+.login-btn.signed-in{display:flex;align-items:center;gap:8px;padding:5px 16px 5px 5px;border-radius:30px;text-transform:none;letter-spacing:.3px;}
+.login-btn.signed-in:hover{background:rgba(139,0,0,.15);border-color:var(--dark-red);}
+.profile-avatar{
+  width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:11px;font-weight:700;color:#fff;flex-shrink:0;font-family:'Space Grotesk',sans-serif;
+}
+.profile-avatar.large{width:64px;height:64px;font-size:22px;}
+.profile-avatar-img{width:26px;height:26px;border-radius:50%;object-fit:cover;flex-shrink:0;}
+.profile-avatar-img.large{width:64px;height:64px;}
+.profile-name{font-size:12px;}
+.hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;padding:8px;}
+.hamburger span{width:22px;height:1.5px;background:var(--white);}
+
+/* MOBILE MENU */
+#mobileMenu{
+  position:fixed;top:0;right:-320px;width:280px;height:100%;background:var(--header-glass);
+  backdrop-filter:blur(20px);border-left:1px solid var(--border);z-index:600;
+  transition:right .4s cubic-bezier(.19,1,.22,1);padding:90px 30px;display:flex;flex-direction:column;gap:26px;
+}
+#mobileMenu.open{right:0;}
+#mobileMenu a{font-size:15px;letter-spacing:1px;color:var(--grey);}
+#mobileMenu a:hover{color:var(--white);}
+#menuOverlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:590;display:none;}
+#menuOverlay.open{display:block;}
+
+/* SECTIONS / PAGES */
+.page{display:none;min-height:100vh;padding-top:110px;}
+.page.active{display:block;animation:pageIn .5s ease;}
+@keyframes pageIn{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+.container{max-width:1200px;margin:0 auto;padding:0 5%;}
+
+/* HERO */
+.hero{position:relative;min-height:88vh;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;}
+.hero canvas{position:absolute;inset:0;width:100%;height:100%;}
+.hero-content{position:relative;z-index:2;max-width:720px;padding:0 20px;}
+.eyebrow{font-size:12px;letter-spacing:5px;color:var(--dark-red);text-transform:uppercase;margin-bottom:22px;font-weight:500;}
+.hero-logo-mark{font-family:'Space Grotesk',sans-serif;font-size:clamp(56px,14vw,128px);font-weight:700;letter-spacing:1px;margin-bottom:20px;opacity:0;animation:fadeUp 1s ease forwards;animation-delay:.1s;}
+.hero-logo-mark .a{color:var(--white);}
+.hero-logo-mark .v{color:var(--dark-red);text-shadow:0 0 30px rgba(139,0,0,.5);}
+.hero h1{font-size:clamp(38px,6vw,68px);font-weight:700;line-height:1.1;margin-bottom:22px;}
+.hero h1 span{color:var(--dark-red);}
+.hero p{color:var(--grey);font-size:17px;line-height:1.7;margin-bottom:38px;font-weight:300;}
+.cta-row{display:flex;gap:18px;justify-content:center;flex-wrap:wrap;}
+.btn{
+  padding:15px 34px;border-radius:2px;font-size:13px;letter-spacing:2px;text-transform:uppercase;
+  transition:all .35s ease;border:1px solid transparent;font-weight:500;
+}
+.btn-primary{background:var(--dark-red);color:var(--pure-white);}
+.btn-primary:hover{background:var(--accent-red);box-shadow:0 0 28px rgba(160,0,28,.55);transform:translateY(-2px);}
+.btn-outline{border-color:var(--border-strong);color:var(--white);background:transparent;}
+.btn-outline:hover{border-color:var(--dark-red);background:rgba(139,0,0,.15);}
+
+/* FEATURE CARDS */
+.section-title{text-align:center;margin-bottom:50px;}
+.section-title .eyebrow{margin-bottom:14px;}
+.section-title h2{font-size:clamp(26px,4vw,40px);font-weight:600;}
+.section{padding:100px 0;}
+.feature-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:22px;}
+.glass-card{
+  aspect-ratio:1/1;background:var(--glass);border:1px solid var(--border);border-radius:6px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;
+  padding:20px;text-align:center;transition:all .4s ease;cursor:pointer;
+}
+.glass-card:hover{transform:translateY(-8px);border-color:var(--dark-red);box-shadow:0 14px 40px rgba(139,0,0,.25);}
+.glass-card svg{width:34px;height:34px;stroke:var(--grey);transition:stroke .3s;}
+.glass-card:hover svg{stroke:var(--dark-red);}
+.glass-card h3{font-size:16px;font-weight:500;letter-spacing:.5px;}
+.glass-card p{font-size:12px;color:var(--grey);font-weight:300;}
+
+/* COURSE CARDS */
+.course-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:26px;}
+.course-card{
+  background:var(--glass);border:1px solid var(--border);border-radius:6px;overflow:hidden;
+  transition:all .4s ease;cursor:pointer;
+}
+.course-card:hover{transform:translateY(-6px);border-color:var(--dark-red);box-shadow:0 16px 40px rgba(139,0,0,.22);}
+.course-cover{
+  height:160px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;
+}
+.course-cover .cover-icon{width:56px;height:56px;stroke:rgba(255,255,255,.55);stroke-width:1.2;position:relative;z-index:2;transition:transform .4s ease;}
+.course-card:hover .cover-icon{transform:scale(1.08);stroke:rgba(255,255,255,.85);}
+.course-cover .cover-mark{position:absolute;bottom:10px;right:14px;font-size:13px;font-weight:700;letter-spacing:2px;color:rgba(255,255,255,.18);z-index:2;font-family:'Space Grotesk',sans-serif;}
+.course-cover::before{content:'';position:absolute;inset:0;opacity:.5;background-image:radial-gradient(circle at 30% 30%, rgba(255,255,255,.08), transparent 60%);}
+.badge{
+  position:absolute;top:12px;right:12px;font-size:10px;letter-spacing:1.5px;text-transform:uppercase;
+  padding:5px 10px;border-radius:20px;font-weight:600;
+}
+.badge.premium{background:rgba(139,0,0,.85);color:#fff;}
+.badge.free{background:rgba(255,255,255,.12);color:#fff;border:1px solid var(--border);}
+.course-body{padding:22px;}
+.course-body h3{font-size:17px;margin-bottom:8px;font-weight:600;}
+.course-body p{font-size:13px;color:var(--grey);font-weight:300;line-height:1.6;margin-bottom:14px;}
+.course-meta{display:flex;gap:14px;font-size:11px;color:var(--grey);margin-bottom:16px;letter-spacing:.5px;}
+.progress-track{height:4px;background:rgba(255,255,255,.08);border-radius:4px;overflow:hidden;margin-bottom:10px;}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--dark-red),var(--accent-red));border-radius:4px;transition:width .5s ease;}
+.small-btn{
+  width:100%;padding:11px;text-align:center;border:1px solid var(--border-strong);border-radius:2px;
+  font-size:12px;letter-spacing:1.5px;text-transform:uppercase;transition:all .3s;
+}
+.small-btn:hover{background:var(--dark-red);border-color:var(--dark-red);}
+.theme-opt{
+  padding:12px 26px;border:1px solid var(--border);background:var(--glass);color:var(--white);
+  border-radius:2px;font-size:13px;letter-spacing:1px;transition:all .3s ease;
+}
+.theme-opt:hover{border-color:var(--dark-red);}
+.theme-opt.active{border-color:var(--dark-red);background:rgba(139,0,0,.18);}
+
+/* LESSON READER */
+.lesson-wrap{max-width:760px;margin:0 auto;padding:0 5% 100px;}
+.lesson-top{border-bottom:1px solid var(--border);padding-bottom:20px;margin-bottom:36px;}
+.lesson-top .crumb{font-size:11px;letter-spacing:2px;color:var(--dark-red);text-transform:uppercase;margin-bottom:10px;}
+.lesson-top h1{font-size:30px;font-weight:600;margin-bottom:14px;}
+.lesson-meta-row{display:flex;gap:18px;font-size:12px;color:var(--grey);align-items:center;flex-wrap:wrap;}
+.lesson-content{font-size:17px;line-height:1.9;font-weight:300;color:var(--white);opacity:.92;}
+.lesson-content p{margin-bottom:22px;}
+.lesson-content h3{font-family:'Space Grotesk',sans-serif;font-size:20px;margin:32px 0 14px;color:var(--white);}
+.lesson-nav{display:flex;justify-content:space-between;align-items:center;margin-top:50px;padding-top:30px;border-top:1px solid var(--border);gap:12px;flex-wrap:wrap;}
+.mark-complete{
+  padding:14px 30px;background:var(--dark-red);border-radius:2px;font-size:13px;letter-spacing:2px;
+  text-transform:uppercase;transition:all .3s;border:none;color:#fff;
+}
+.mark-complete:hover{background:var(--accent-red);box-shadow:0 0 24px rgba(160,0,28,.5);}
+.mark-complete.done{background:var(--glass);color:var(--grey);border:1px solid var(--border);}
+.nav-side{font-size:12px;letter-spacing:1.5px;color:var(--grey);text-transform:uppercase;transition:color .3s;}
+.nav-side:hover{color:var(--white);}
+.nav-side.disabled{opacity:.3;pointer-events:none;}
+
+/* DASHBOARD */
+.dash-layout{display:flex;min-height:calc(100vh - 110px);}
+.sidebar{
+  width:250px;flex-shrink:0;border-right:1px solid var(--border);padding:20px 0;
+  display:flex;flex-direction:column;gap:2px;
+}
+.sidebar a{
+  padding:13px 28px;font-size:13px;letter-spacing:.5px;color:var(--grey);border-left:2px solid transparent;
+  transition:all .25s;
+}
+.sidebar a:hover{color:var(--white);background:rgba(255,255,255,.02);}
+.sidebar a.active{color:var(--white);border-left-color:var(--dark-red);background:rgba(139,0,0,.08);}
+.dash-main{flex:1;padding:40px 5%;}
+.dash-main h1{font-size:26px;margin-bottom:6px;}
+.dash-sub{color:var(--grey);font-size:14px;margin-bottom:36px;font-weight:300;}
+.stat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:18px;margin-bottom:50px;}
+.stat-card{background:var(--glass);border:1px solid var(--border);border-radius:6px;padding:22px;transition:.3s;}
+.stat-card:hover{border-color:var(--dark-red);}
+.stat-card .num{font-family:'Space Grotesk',sans-serif;font-size:30px;font-weight:700;color:var(--white);}
+.stat-card .lbl{font-size:11px;letter-spacing:1.5px;color:var(--grey);text-transform:uppercase;margin-top:6px;}
+.dash-section-title{font-size:17px;font-weight:600;margin-bottom:18px;padding-bottom:10px;border-bottom:1px solid var(--border);}
+.lesson-history-row{
+  display:flex;justify-content:space-between;align-items:center;padding:16px 0;border-bottom:1px solid var(--border);
+  font-size:13px;flex-wrap:wrap;gap:6px;
+}
+.lesson-history-row .lh-title{font-weight:500;}
+.lesson-history-row .lh-course{color:var(--grey);font-size:12px;}
+.lesson-history-row .lh-date{color:var(--grey);font-size:12px;}
+.status-pill{font-size:10px;letter-spacing:1px;text-transform:uppercase;background:rgba(139,0,0,.2);color:#ff8080;padding:4px 10px;border-radius:20px;}
+
+/* QUIZ */
+.quiz-wrap{max-width:680px;margin:0 auto;padding:0 5% 100px;}
+.quiz-progress{font-size:12px;letter-spacing:2px;color:var(--dark-red);text-transform:uppercase;margin-bottom:18px;}
+.quiz-q{font-size:22px;font-weight:600;margin-bottom:30px;line-height:1.5;}
+.quiz-opt{
+  display:block;width:100%;text-align:left;padding:16px 20px;margin-bottom:12px;background:var(--glass);
+  border:1px solid var(--border);border-radius:4px;font-size:14px;color:var(--white);transition:all .25s;
+}
+.quiz-opt:hover{border-color:rgba(139,0,0,.6);background:rgba(139,0,0,.08);}
+.quiz-opt.selected{border-color:var(--dark-red);background:rgba(139,0,0,.18);}
+.quiz-opt.correct{border-color:#3a7d3a;background:rgba(58,125,58,.18);}
+.quiz-opt.wrong{border-color:var(--accent-red);background:rgba(160,0,28,.18);}
+
+.quiz-result{text-align:center;padding:60px 0;}
+.quiz-result .big-score{font-family:'Space Grotesk',sans-serif;font-size:64px;font-weight:700;margin-bottom:10px;}
+.quiz-result.pass .big-score{color:var(--white);text-shadow:0 0 30px rgba(139,0,0,.6);}
+.confetti-dot{position:absolute;border-radius:50%;pointer-events:none;}
+
+/* FOOTER */
+footer{border-top:1px solid var(--border);padding:60px 5% 30px;margin-top:60px;}
+.footer-inner{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;flex-wrap:wrap;gap:30px;}
+.footer-desc{max-width:340px;color:var(--grey);font-size:13px;line-height:1.8;font-weight:300;}
+.footer-links{display:flex;gap:50px;flex-wrap:wrap;}
+.footer-col h4{font-size:12px;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px;color:var(--grey);}
+.footer-col a{display:block;font-size:13px;color:#999;margin-bottom:10px;transition:color .3s;}
+.footer-col a:hover{color:var(--white);}
+.footer-bottom{max-width:1200px;margin:40px auto 0;padding-top:20px;border-top:1px solid var(--border);font-size:12px;color:#666;text-align:center;}
+
+/* VIDEOS */
+.video-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:26px;}
+.video-card{
+  background:var(--glass);border:1px solid var(--border);border-radius:6px;overflow:hidden;
+  transition:all .35s ease;cursor:pointer;
+}
+.video-card:hover{transform:translateY(-6px);border-color:var(--dark-red);box-shadow:0 16px 40px rgba(139,0,0,.22);}
+.video-thumb{position:relative;width:100%;aspect-ratio:16/9;background:#0c0505;overflow:hidden;}
+.video-thumb img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .4s ease;}
+.video-card:hover .video-thumb img{transform:scale(1.06);}
+.video-duration{
+  position:absolute;bottom:8px;right:8px;background:rgba(0,0,0,.75);color:#fff;font-size:11px;
+  padding:2px 7px;border-radius:3px;letter-spacing:.5px;
+}
+.video-play-overlay{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  background:rgba(9,9,9,.15);opacity:0;transition:opacity .3s ease;
+}
+.video-card:hover .video-play-overlay{opacity:1;}
+.video-play-overlay svg{width:52px;height:52px;filter:drop-shadow(0 0 12px rgba(139,0,0,.8));}
+.video-body{padding:16px 18px;}
+.video-body h3{font-size:14px;font-weight:600;line-height:1.4;margin-bottom:8px;}
+.video-meta{font-size:11px;color:var(--grey);letter-spacing:.5px;}
+
+/* FLOATING BACK BUTTON */
+#backFloatBtn{
+  position:fixed;bottom:26px;left:26px;width:52px;height:52px;border-radius:50%;
+  background:var(--glass);border:1px solid var(--border);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  display:none;align-items:center;justify-content:center;z-index:800;transition:all .3s ease;
+  box-shadow:0 6px 20px rgba(0,0,0,.35);
+}
+#backFloatBtn:hover{border-color:var(--dark-red);background:rgba(139,0,0,.18);box-shadow:0 6px 24px rgba(139,0,0,.35);transform:translateX(-3px);}
+#backFloatBtn svg{width:22px;height:22px;stroke:var(--white);}
+
+/* SUBSCRIBE MODAL */
+.modal-overlay{
+  position:fixed;inset:0;background:rgba(0,0,0,.78);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  z-index:3000;display:none;align-items:center;justify-content:center;padding:20px;
+}
+.modal-overlay.show{display:flex;animation:fadeUp .3s ease;}
+.modal-box{
+  background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:36px 32px;
+  max-width:340px;width:100%;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.5);
+}
+.modal-continue-text{font-size:15px;color:var(--white);font-weight:500;margin-bottom:22px;letter-spacing:.3px;}
+.google-btn{
+  width:100%;display:flex;align-items:center;justify-content:center;gap:10px;
+  background:#fff;color:#1f1f1f;border:1px solid #dadce0;border-radius:4px;padding:12px 16px;
+  font-size:14px;font-weight:500;font-family:'Inter',sans-serif;transition:box-shadow .2s ease,background .2s ease;
+}
+.google-btn:hover{box-shadow:0 1px 8px rgba(0,0,0,.2);background:#f8f8f8;}
+
+/* NOTIFICATION TOAST */
+#toast{
+  position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(20px);
+  background:rgba(17,17,17,.95);border:1px solid var(--dark-red);padding:14px 26px;border-radius:4px;
+  font-size:13px;z-index:2000;opacity:0;pointer-events:none;transition:all .4s ease;backdrop-filter:blur(10px);
+  color:var(--pure-white);
+}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* RESPONSIVE */
+@media(max-width:860px){
+  nav.main-nav{display:none;}
+  .hamburger{display:flex;}
+  .login-btn{display:none;}
+  .dash-layout{flex-direction:column;}
+  .sidebar{width:100%;flex-direction:row;overflow-x:auto;border-right:none;border-bottom:1px solid var(--border);padding:10px 0;}
+  .sidebar a{white-space:nowrap;border-left:none;border-bottom:2px solid transparent;padding:10px 16px;}
+  .sidebar a.active{border-left:none;border-bottom-color:var(--dark-red);}
+}
+</style>
+</head>
+<body>
+
+<!-- AMBIENT BACKGROUND ACCENTS (visible in light theme) -->
+<div class="ambient-blobs" aria-hidden="true">
+  <span class="blob b1"></span>
+  <span class="blob b2"></span>
+  <span class="blob b3"></span>
+  <span class="blob b4"></span>
+  <span class="blob b5"></span>
+</div>
+
+
+<!-- SPLASH -->
+<div id="splash">
+  <div class="splash-logo">
+    <span class="letter a">A</span><span class="letter v">V</span>
+  </div>
+  <div class="splash-brand">Alpha Veil</div>
+  <button class="splash-btn" id="enterBtn">Enter to the Veil</button>
+</div>
+
+<!-- LOADING -->
+<div id="loading">
+  <canvas id="loadCanvas"></canvas>
+  <div class="loading-inner">
+    <div class="loading-logo"><span class="a">A</span><span class="v">V</span></div>
+    <div class="loading-bar"></div>
+    <div class="loading-text">Entering the Veil...</div>
+  </div>
+</div>
+
+<!-- MOBILE MENU -->
+<div id="menuOverlay"></div>
+<div id="mobileMenu">
+  <a data-page="home">Home</a>
+  <a data-page="about">About</a>
+  <a data-page="courses">Courses</a>
+  <a data-page="videos">Videos</a>
+  <a data-page="dashboard">Dashboard</a>
+  <a data-page="membership">Membership</a>
+  <a data-page="settings">Settings</a>
+  <a data-page="faq">FAQ</a>
+  <a data-page="contact">Contact</a>
+</div>
+
+<!-- APP -->
+<div id="app">
+  <header id="siteHeader">
+    <div class="brand" data-page="home">
+      <span class="brand-mark"><span class="a">A</span><span class="v">V</span></span>
+      <span class="brand-name">Alpha Veil</span>
+    </div>
+    <nav class="main-nav">
+      <a data-page="home" class="active">Home</a>
+      <a data-page="about">About</a>
+      <a data-page="courses">Courses</a>
+      <a data-page="videos">Videos</a>
+      <a data-page="dashboard">Dashboard</a>
+      <a data-page="membership">Membership</a>
+      <a data-page="faq">FAQ</a>
+      <a data-page="contact">Contact</a>
+    </nav>
+    <div class="header-right">
+      <div class="icon-btn" title="Search">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#BEBEBE" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      </div>
+      <a class="login-btn" id="profileNavBtn" data-page="dashboard">Profile</a>
+      <button class="hamburger" id="hamburgerBtn"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <!-- HOME -->
+  <section class="page active" id="page-home">
+    <div class="hero">
+      <canvas id="heroCanvas"></canvas>
+      <div class="hero-content">
+        <div class="hero-logo-mark"><span class="a">A</span><span class="v">V</span></div>
+        <div class="eyebrow">Unlock the Hidden Psychology of Success</div>
+        <h1>Welcome to <span>Alpha Veil</span></h1>
+        <p>A premium learning platform for those who study human nature seriously — persuasion, confidence, body language and the quiet mechanics of influence, taught through structured courses instead of scattered articles.</p>
+        <div class="cta-row">
+          <a class="btn btn-primary" data-page="courses">Explore Courses</a>
+          <a class="btn btn-outline" data-page="membership">Become Premium</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="container">
+        <div class="section-title">
+          <div class="eyebrow">The Platform</div>
+          <h2>Everything you need to master the craft</h2>
+        </div>
+        <div class="feature-grid" id="featureGrid"></div>
+      </div>
+    </div>
+
+    <div class="section" style="padding-top:0;">
+      <div class="container">
+        <div class="section-title">
+          <h2>Start with a structured course</h2>
+        </div>
+        <div class="course-grid" id="homeCourseGrid"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="page" id="page-about">
+    <div class="container" style="max-width:800px;padding-bottom:100px;">
+      <div class="section-title" style="text-align:left;">
+        <div class="eyebrow">Our Story</div>
+        <h2>Why Alpha Veil exists</h2>
+      </div>
+      <div class="lesson-content">
+        <p>Most people study psychology by accident — a scattered video here, a viral thread there. Alpha Veil exists to replace that noise with structure: real courses, written like books, that take you from a single idea to genuine mastery.</p>
+        <h3>Our Mission</h3>
+        <p>To make the hidden mechanics of human behavior — influence, confidence, communication, persuasion — learnable in a deliberate, disciplined way, for anyone willing to do the reading.</p>
+        <h3>Our Philosophy</h3>
+        <p>Depth over noise. Every course is built lesson by lesson, tested by a single closing quiz, and never gatekept once you've earned it — completed material stays yours to revisit, always.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- COURSES -->
+  <section class="page" id="page-courses">
+    <div class="container">
+      <div class="section-title">
+        <div class="eyebrow">Structured Learning</div>
+        <h2>Courses</h2>
+      </div>
+      <div class="course-grid" id="allCourseGrid"></div>
+    </div>
+  </section>
+
+  <!-- VIDEOS -->
+  <section class="page" id="page-videos">
+    <div class="container">
+      <div class="section-title">
+        <div class="eyebrow">Watch &amp; Learn</div>
+        <h2>Videos</h2>
+      </div>
+      <div class="video-grid" id="videoGrid"></div>
+    </div>
+  </section>
+
+  <!-- COURSE DETAIL -->
+  <section class="page" id="page-courseDetail">
+    <div class="container" style="max-width:820px;">
+      <div id="courseDetailBody"></div>
+    </div>
+  </section>
+
+  <!-- LESSON -->
+  <section class="page" id="page-lesson">
+    <div class="lesson-wrap" id="lessonBody"></div>
+  </section>
+
+  <!-- QUIZ -->
+  <section class="page" id="page-quiz">
+    <div class="quiz-wrap" id="quizBody"></div>
+  </section>
+
+  <!-- DASHBOARD -->
+  <section class="page" id="page-dashboard">
+    <div class="dash-layout">
+      <div class="sidebar" id="dashSidebar">
+        <a data-dash="overview" class="active">Dashboard</a>
+        <a data-dash="mycourses">My Courses</a>
+        <a data-dash="completed">Completed Courses</a>
+        <a data-dash="history">Lesson History</a>
+        <a data-page="membership">Membership</a>
+      </div>
+      <div class="dash-main" id="dashMain"></div>
+    </div>
+  </section>
+
+  <!-- MEMBERSHIP -->
+  <section class="page" id="page-membership">
+    <div class="container" style="max-width:900px;">
+      <div class="section-title">
+        <div class="eyebrow">Membership</div>
+        <h2>Become Premium</h2>
+        <p style="color:var(--grey);margin-top:14px;font-weight:300;">Unlock every premium course, eBook and lesson — including everything added in the future, for as long as you remain a member.</p>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:24px;">
+        <div class="glass-card" style="aspect-ratio:auto;padding:40px 26px;">
+          <h3 style="font-size:14px;letter-spacing:2px;color:var(--grey);text-transform:uppercase;">Monthly</h3>
+          <div style="font-family:'Space Grotesk';font-size:38px;font-weight:700;">$19<span style="font-size:14px;color:var(--grey);">/mo</span></div>
+          <button class="btn btn-primary" style="width:100%;" onclick="mockCheckout()">Become Premium</button>
+        </div>
+        <div class="glass-card" style="aspect-ratio:auto;padding:40px 26px;border-color:var(--dark-red);">
+          <h3 style="font-size:14px;letter-spacing:2px;color:var(--dark-red);text-transform:uppercase;">Yearly · Best Value</h3>
+          <div style="font-family:'Space Grotesk';font-size:38px;font-weight:700;">$149<span style="font-size:14px;color:var(--grey);">/yr</span></div>
+          <button class="btn btn-primary" style="width:100%;" onclick="mockCheckout()">Become Premium</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SETTINGS -->
+  <section class="page" id="page-settings">
+    <div class="container" style="max-width:600px;padding-bottom:100px;">
+      <div class="section-title" style="text-align:left;">
+        <div class="eyebrow">Preferences</div>
+        <h2>Settings</h2>
+      </div>
+      <div class="glass-card" style="aspect-ratio:auto;padding:32px;text-align:left;align-items:flex-start;">
+        <h3 style="font-size:16px;margin-bottom:6px;">Theme</h3>
+        <p style="color:var(--grey);font-size:13px;font-weight:300;margin-bottom:22px;">Choose how Alpha Veil looks on your screen.</p>
+        <div style="display:flex;gap:14px;">
+          <button class="theme-opt" data-theme="dark" id="themeDarkBtn">🌑 Dark</button>
+          <button class="theme-opt" data-theme="light" id="themeLightBtn">☀️ Light</button>
+        </div>
+      </div>
+
+      <div class="glass-card" style="aspect-ratio:auto;padding:32px;text-align:left;align-items:flex-start;margin-top:20px;">
+        <h3 style="font-size:16px;margin-bottom:6px;">Owner Preview</h3>
+        <p style="color:var(--grey);font-size:13px;font-weight:300;margin-bottom:22px;">For the site owner only — preview every Premium course without needing to buy membership. Everyone else will be sent to the Membership page when they open a Premium course.</p>
+        <div style="display:flex;gap:14px;">
+          <button class="theme-opt" data-owner="on" id="ownerOnBtn">Enable</button>
+          <button class="theme-opt active" data-owner="off" id="ownerOffBtn">Disable</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="page" id="page-faq">
+    <div class="container" style="max-width:760px;padding-bottom:100px;">
+      <div class="section-title" style="text-align:left;">
+        <div class="eyebrow">Support</div>
+        <h2>Frequently Asked Questions</h2>
+      </div>
+      <div id="faqList"></div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="page" id="page-contact">
+    <div class="container" style="max-width:600px;padding-bottom:100px;">
+      <div class="section-title" style="text-align:left;">
+        <div class="eyebrow">Get in Touch</div>
+        <h2>Contact Us</h2>
+      </div>
+      <form id="contactForm" style="display:flex;flex-direction:column;gap:16px;" onsubmit="return submitContact(event)">
+        <input required placeholder="Name" style="background:var(--glass);border:1px solid var(--border);padding:14px 16px;color:var(--white);border-radius:4px;">
+        <input required type="email" placeholder="Email" style="background:var(--glass);border:1px solid var(--border);padding:14px 16px;color:var(--white);border-radius:4px;">
+        <input required placeholder="Subject" style="background:var(--glass);border:1px solid var(--border);padding:14px 16px;color:var(--white);border-radius:4px;">
+        <textarea required placeholder="Message" rows="5" style="background:var(--glass);border:1px solid var(--border);padding:14px 16px;color:var(--white);border-radius:4px;font-family:inherit;"></textarea>
+        <button class="btn btn-primary" type="submit">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div>
+        <div class="brand" style="margin-bottom:16px;">
+          <span class="brand-mark"><span class="a">A</span><span class="v">V</span></span>
+        </div>
+        <p class="footer-desc">Alpha Veil is a premium learning platform dedicated to psychology, self-improvement, influence, communication, confidence and personal growth.</p>
+      </div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <a data-page="courses">Courses</a>
+          <a data-page="about">About</a>
+          <a data-page="membership">Membership</a>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <a data-page="faq">FAQ</a>
+          <a data-page="contact">Contact</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">© 2026 Alpha Veil. All Rights Reserved.</div>
+  </footer>
+
+  <button id="backFloatBtn" title="Go Back">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg>
+  </button>
+</div>
+
+<!-- SUBSCRIBE MODAL -->
+<div id="subscribeModal" class="modal-overlay">
+  <div class="modal-box">
+    <div class="brand-mark" style="justify-content:center;display:flex;margin-bottom:16px;font-size:26px;"><span class="a">A</span><span class="v">V</span></div>
+    <p class="modal-continue-text">Click here to continue</p>
+    <a id="subscribeLink" class="btn btn-primary" style="width:100%;display:block;margin-bottom:14px;" target="_blank" rel="noopener">Subscribe</a>
+    <button id="continueToVideoBtn" class="btn btn-outline" style="width:100%;">Continue to Video</button>
+  </div>
+</div>
+
+<!-- SIGN IN MODAL -->
+<div id="signinModal" class="modal-overlay">
+  <div class="modal-box">
+    <div class="brand-mark" style="justify-content:center;display:flex;margin-bottom:16px;font-size:26px;"><span class="a">A</span><span class="v">V</span></div>
+    <p class="modal-continue-text">Sign in to access your Alpha Veil dashboard</p>
+    <div id="googleBtnContainer" style="display:flex;justify-content:center;margin-bottom:14px;"></div>
+    <p id="googleBtnFallbackMsg" style="display:none;font-size:12px;color:var(--grey);margin-bottom:14px;">Google Sign-In isn't configured yet on this page (missing Client ID).</p>
+    <button id="closeSigninBtn" class="btn btn-outline" style="width:100%;">Cancel</button>
+  </div>
+</div>
+
+<div id="toast"></div>
+
+<script>
+/* ============ DATA ============ */
+const iconLibrary = {
+  book:'<path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>',
+  play:'<circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/>',
+  feather:'<path d="M20.24 12.24a6 6 0 0 0-8.49-8.49L5 10.5V19h8.5z"/><line x1="16" y1="8" x2="2" y2="22"/><line x1="17.5" y1="15" x2="9" y2="15"/>',
+  layers:'<polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/>',
+  target:'<circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/>',
+  users:'<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
+  eye:'<path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/>',
+  network:'<circle cx="6" cy="6" r="2.4"/><circle cx="18" cy="6" r="2.4"/><circle cx="12" cy="18" r="2.4"/><line x1="7.8" y1="7.4" x2="10.6" y2="16"/><line x1="16.2" y1="7.4" x2="13.4" y2="16"/><line x1="8.4" y1="6" x2="15.6" y2="6"/>',
+  ascend:'<path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/>'
+};
+function icon(name){return `<svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">${iconLibrary[name]}</svg>`;}
+
+/* Cover art per course — icon + tint matched to each course's subject matter */
+const courseVisuals = {
+  'body-language':{icon:'eye', tint:'linear-gradient(135deg,#1c1414,#3a0d0d)'},
+  'influence':{icon:'network', tint:'linear-gradient(135deg,#141418,#4a0a12)'},
+  'confidence':{icon:'ascend', tint:'linear-gradient(135deg,#161010,#2a1005)'}
+};
+function coverHTML(c){
+  const v = courseVisuals[c.id] || {icon:'book', tint:'linear-gradient(135deg,#1a1a1a,#0c0505)'};
+  return `<svg class="cover-icon" viewBox="0 0 24 24" fill="none" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">${iconLibrary[v.icon]}</svg><span class="cover-mark">AV</span>`;
+}
+function coverStyle(c){
+  const v = courseVisuals[c.id] || {tint:'linear-gradient(135deg,#1a1a1a,#0c0505)'};
+  return `background:${v.tint};`;
+}
+
+const features = [
+  {icon:'book',title:'Courses',desc:'Structured lessons',page:'courses'},
+  {icon:'play',title:'Videos',desc:'Curated teachings',page:'videos'},
+  {icon:'feather',title:'Blog',desc:'Deeper essays',page:'home'},
+  {icon:'layers',title:'eBooks',desc:'The full library',page:'home'},
+  {icon:'target',title:'AI Quiz',desc:'Test your mastery',page:'home'},
+  {icon:'users',title:'Community',desc:'Join the circle',page:'home'},
+];
+
+/* Alpha Veil YouTube channel videos — clicking opens directly on YouTube */
+const videos = [
+  {id:'HPnVXRBBFV8', title:'Fake Friend vs Real Friend | 4 Signs You Should Never Ignore | Alpha Veil', duration:'2:09', views:'15 views', age:'5 days ago'},
+  {id:'ejSLHS2oIJc', title:"How to Read People's Intentions | 5 Psychological Signs You Should Never Ignore", duration:'2:38', views:'30 views', age:'8 days ago'},
+  {id:'OVnx_TR4rz8', title:'The Art of Saying NO | Alpha Veil', duration:'2:28', views:'30 views', age:'13 days ago'},
+  {id:'cr0NAcAR4So', title:'Motivation vs Discipline | Why Discipline Always Wins', duration:'3:16', views:'42 views', age:'2 weeks ago'},
+  {id:'6c9rBbTo-tw', title:'ATTENTION FORCE NAHI HO SAKTA | Ye Samjho Aur Badal Jao', duration:'3:46', views:'28 views', age:'3 weeks ago'},
+  {id:'Af0UNQjlxBE', title:'Why People Ignore You? | 3 Hidden Reasons', duration:'3:26', views:'49 views', age:'1 month ago'},
+  {id:'IsXPBPxt1FY', title:'🕶️ The Hidden Power of Silence 🤐', duration:'3:06', views:'24 views', age:'1 month ago'},
+  {id:'ynD-0v6VTrg', title:'The Hidden Power of Eye Contact | Psychology of Eye Contact', duration:'2:19', views:'146 views', age:'1 month ago'},
+];
+function renderVideos(){
+  document.getElementById('videoGrid').innerHTML = videos.map(v=>`
+    <div class="video-card" data-yt="${v.id}">
+      <div class="video-thumb">
+        <img src="https://i.ytimg.com/vi/${v.id}/hqdefault.jpg" alt="${v.title}" loading="lazy">
+        <span class="video-duration">${v.duration}</span>
+        <div class="video-play-overlay">
+          <svg viewBox="0 0 68 48"><path d="M66.52,7.74c-.78-2.93-2.49-5.41-5.42-6.19C55.79.13,34,0,34,0S12.21.13,6.9,1.55C3.97,2.33,2.27,4.81,1.48,7.74C.06,13.05,0,24,0,24s.06,10.95,1.48,16.26c.78,2.93,2.49,5.41,5.42,6.19C12.21,47.87,34,48,34,48s21.79-.13,27.1-1.55c2.93-.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24s-.06-10.95-1.48-16.26" fill="#8B0000"/><path d="M45,24,27,14V34" fill="#fff"/></svg>
+        </div>
+      </div>
+      <div class="video-body">
+        <h3>${v.title}</h3>
+        <div class="video-meta">${v.views} · ${v.age}</div>
+      </div>
+    </div>`).join('');
+  document.querySelectorAll('.video-card').forEach(card=>{
+    card.addEventListener('click',()=>{
+      openSubscribeModal(card.getAttribute('data-yt'));
+    });
+  });
+}
+
+/* ============ SUBSCRIBE MODAL ============ */
+const YT_CHANNEL_URL = 'https://www.youtube.com/@AlphaVeil-1073';
+let pendingVideoId = null;
+function openSubscribeModal(videoId){
+  pendingVideoId = videoId;
+  document.getElementById('subscribeLink').href = `${YT_CHANNEL_URL}?sub_confirmation=1`;
+  document.getElementById('subscribeModal').classList.add('show');
+}
+document.getElementById('continueToVideoBtn').addEventListener('click', ()=>{
+  document.getElementById('subscribeModal').classList.remove('show');
+  if(pendingVideoId) window.open(`https://www.youtube.com/watch?v=${pendingVideoId}`, '_blank', 'noopener');
+  pendingVideoId = null;
+});
+document.getElementById('subscribeLink').addEventListener('click', ()=>{
+  setTimeout(()=>{
+    document.getElementById('subscribeModal').classList.remove('show');
+    if(pendingVideoId) window.open(`https://www.youtube.com/watch?v=${pendingVideoId}`, '_blank', 'noopener');
+    pendingVideoId = null;
+  }, 400);
+});
+document.getElementById('subscribeModal').addEventListener('click',(e)=>{
+  if(e.target.id==='subscribeModal') document.getElementById('subscribeModal').classList.remove('show');
+});
+
+const courses = [
+  {
+    id:'body-language', title:'Mastering Body Language', premium:false,
+    desc:'Read intention before a word is spoken. A practical study of posture, gesture and micro-expression.',
+    difficulty:'Beginner', time:'42 min',
+    lessons:[
+      {title:'The Silent Channel', time:'9 min', content:`<p>Long before language existed, the body was already speaking. Every shift in posture, every held breath, every fraction-of-a-second flicker across a face — this is the oldest communication system humans have, and it never stopped running underneath our words.</p><p>Most people read body language unconsciously and badly: they notice a crossed arm and jump straight to "defensive," missing the dozen other signals around it that would tell the real story. Mastery begins with slowing that instinct down.</p><h3>The First Rule</h3><p>Never read a single signal in isolation. A gesture only means something in the context of the three or four signals surrounding it, and the baseline behavior of the specific person in front of you.</p>`},
+      {title:'Establishing a Baseline', time:'11 min', content:`<p>Before you can spot a meaningful change in someone's behavior, you need to know what "normal" looks like for them specifically. This is the single most overlooked skill in reading people — and the one that separates amateurs from professionals.</p><p>Watch someone in a low-stakes moment: small talk, waiting for coffee, casual conversation. Note their default posture, their resting expression, how much they gesture when relaxed. That's your reference point.</p><h3>Why This Matters</h3><p>A naturally still person going rigid means something entirely different from an animated person going rigid. Without a baseline, you're just guessing — and guessing is how most people get body language wrong.</p>`},
+      {title:'Micro-Expressions', time:'10 min', content:`<p>A micro-expression is a flash of true emotion that crosses the face in under half a second — too fast to fake, and usually too fast to consciously suppress. It leaks out before the social mask goes back up.</p><p>The seven universal expressions — anger, disgust, fear, happiness, sadness, surprise, contempt — look remarkably similar across every culture on earth. This is one of the few truly universal languages humans share.</p><h3>Training the Eye</h3><p>You don't need special equipment. Slowing down video of real conversations and pausing frequently is enough to start noticing what your eye currently skips past at full speed.</p>`},
+      {title:'Clusters, Not Signals', time:'12 min', content:`<p>Professionals never rely on a single gesture. They read clusters — three or more signals pointing the same direction — because any individual gesture has a dozen innocent explanations.</p><p>Crossed arms could mean defensiveness, or it could mean the room is cold. A lack of eye contact could mean discomfort, or it could mean the person is simply more visual and looks away to think. Context and clustering resolve the ambiguity.</p><h3>Putting It Together</h3><p>From here, the discipline is simple to state and hard to practice: observe the baseline, watch for deviation, look for clusters, and never conclude from a single data point. That discipline is what this course has been building toward.</p>`},
+    ]
+  },
+  {
+    id:'influence', title:'The Psychology of Influence', premium:true,
+    desc:'The core mechanics of persuasion — reciprocity, scarcity, authority and social proof, explained and applied.',
+    difficulty:'Intermediate', time:'55 min',
+    lessons:[
+      {title:'Why We Say Yes', time:'13 min', content:`<p>Persuasion isn't manipulation — it's the study of the mental shortcuts people already use to make decisions quickly, and the deliberate, ethical use of those shortcuts to be understood and trusted faster.</p><p>Every day you're influenced by dozens of automatic triggers you never consciously notice: a familiar face gets more benefit of the doubt, a confident tone gets believed faster, an expert's opinion gets weighted more heavily than a stranger's.</p><h3>The Goal of This Course</h3><p>Not to trick people — but to stop being unconsciously influenced yourself, and to communicate in a way that's naturally more persuasive because it respects how people actually decide, not how we wish they decided.</p>`},
+      {title:'Reciprocity', time:'12 min', content:`<p>Give first, and people feel an almost involuntary pull to give back. This is one of the oldest and strongest social rules across every human culture, and it operates below conscious awareness.</p><p>It doesn't require a large gift. A small, genuine, unexpected favor creates disproportionate goodwill — because the obligation it creates in the other person's mind isn't tied to size, it's tied to sincerity.</p><h3>Using It Well</h3><p>The moment reciprocity is used cynically — as a transaction rather than a genuine gesture — people sense it, and it backfires. The technique only works when the giving is real.</p>`},
+      {title:'Scarcity and Authority', time:'14 min', content:`<p>People want things more when they believe those things are rare or about to disappear. This isn't irrational — scarcity is often a genuine signal of value — but it's also exploitable, which is why it shows up in every sales page you've ever seen.</p><p>Authority works differently: we defer to perceived expertise as a decision-making shortcut, because verifying everything ourselves would be exhausting. A white coat, a title, a credential — all of it changes how much weight our words carry before we've said anything of substance.</p><h3>The Ethical Line</h3><p>Genuine scarcity and genuine expertise are persuasive because they're true. Manufactured versions of either erode trust the moment they're discovered.</p>`},
+      {title:'Social Proof', time:'16 min', content:`<p>When people are uncertain, they look to others for the correct behavior. This is why testimonials work, why crowded restaurants seem more appealing than empty ones, and why "most popular" labels move purchasing decisions.</p><p>The effect is strongest under uncertainty and among people who see themselves as similar to those they're observing — a recommendation from someone "like you" outweighs one from someone you don't relate to.</p><h3>Closing Thought</h3><p>Every principle in this course works because it taps into a real, evolved shortcut for decision-making. Used with integrity, they make communication clearer and faster. Used without it, they corrode the trust they depend on.</p>`},
+    ]
+  },
+  {
+    id:'confidence', title:'Confidence Blueprint', premium:true,
+    desc:'Rebuild unshakeable self-assurance from the inside out — physiology, self-talk and social exposure.',
+    difficulty:'Beginner', time:'38 min',
+    lessons:[
+      {title:'Confidence Is a Skill', time:'10 min', content:`<p>Confidence is treated like a personality trait, but it behaves far more like a skill — trainable through repetition, and specific to context. Someone can be deeply confident on stage and quietly anxious in a one-on-one conversation.</p><p>This course treats confidence as something built in layers: physiology first, then internal narrative, then repeated social exposure. Each layer reinforces the next.</p>`},
+      {title:'Physiology First', time:'9 min', content:`<p>The body leads the mind more often than the mind leads the body. Posture, breath and movement send a continuous stream of signals to your own nervous system about whether you're safe or threatened.</p><p>Before you can think your way into confidence, it often helps to stand your way into it — expansive posture and slow, deep breathing measurably shift stress hormone levels within minutes.</p>`},
+      {title:'Rewriting the Inner Voice', time:'9 min', content:`<p>Most self-doubt isn't a reaction to reality — it's a reaction to an internal narrative running on autopilot. The narrative can be identified, questioned and deliberately rewritten with practice.</p><p>This isn't about blind positivity. It's about replacing catastrophic, absolute language ("I always fail at this") with accurate, specific language ("that one attempt didn't work — here's what I'd change").</p>`},
+      {title:'Exposure Builds Proof', time:'10 min', content:`<p>Confidence isn't built by thinking differently in isolation — it's built by collecting evidence. Every small social risk taken and survived becomes proof your nervous system trusts more than any affirmation.</p><p>Start small, repeat often, and let the evidence accumulate. This is the slow, unglamorous, and genuinely reliable path to lasting confidence.</p>`},
+    ]
+  }
+];
+
+/* Quiz question bank generated per course */
+function buildQuiz(course){
+  const bank = {
+    'body-language':[
+      {q:'What is the first rule when reading a body language signal?',opts:['Never read it in isolation','Trust it immediately','Ignore facial expressions','Only trust hand gestures'],a:0},
+      {q:'Why is establishing a baseline important?',opts:['It is not important','It tells you what "normal" looks like for that person','It only works on strangers','It replaces all other signals'],a:1},
+      {q:'How long does a micro-expression typically last?',opts:['Several seconds','About a minute','Under half a second','It never ends'],a:2},
+      {q:'What should you look for instead of a single gesture?',opts:['Clusters of signals','Only eye contact','Only tone of voice','Nothing else matters'],a:0},
+    ],
+    'influence':[
+      {q:'What is the goal of studying persuasion, per this course?',opts:['To manipulate people','To understand and communicate more effectively','To avoid people entirely','To sell anything'],a:1},
+      {q:'What happens when reciprocity is used cynically?',opts:['It works even better','It backfires because people sense it','Nothing changes','It becomes illegal'],a:1},
+      {q:'Why is scarcity persuasive?',opts:['It is always fake','It often signals real value','It has no psychological basis','It only works on children'],a:1},
+      {q:'When is social proof strongest?',opts:['Under certainty','Under uncertainty','Never','Only in large groups'],a:1},
+    ],
+    'confidence':[
+      {q:'How does this course describe confidence?',opts:['A fixed personality trait','A trainable skill','Something you either have or do not','Unrelated to context'],a:1},
+      {q:'What often leads the mind, according to the physiology lesson?',opts:['The body','Random chance','Other people','Nothing leads it'],a:0},
+      {q:'What is the goal of rewriting the inner voice?',opts:['Blind positivity','Accurate, specific language','Ignoring thoughts entirely','Avoiding self-reflection'],a:1},
+      {q:'What builds lasting confidence, per the final lesson?',opts:['Accumulated evidence from repeated exposure','Watching others succeed','One single big win','Avoiding all risk'],a:0},
+    ]
+  };
+  return bank[course.id];
+}
+
+/* ============ STATE (in-memory only) ============ */
+const state = {
+  page:'home',
+  currentCourseId:null,
+  currentLessonIndex:0,
+  progress:{}, // courseId -> {lessonsCompleted:[bool...], quizPassed:bool, quizScore:n}
+  history:[], // {lessonTitle, courseTitle, date}
+  quiz:{ answers:[], current:0, courseId:null },
+  isPremiumMember:false, // becomes true after mockCheckout()
+  ownerPreview:false, // only the site owner should enable this, to preview premium courses without buying membership
+  isSignedIn:false // becomes true after the mock Google sign-in
+};
+courses.forEach(c=>{
+  state.progress[c.id] = { lessonsCompleted: c.lessons.map(()=>false), quizPassed:false, quizScore:null };
+});
+// Pre-seed some realistic progress so the dashboard/"Continue Learning" demo feels real
+state.progress['body-language'].lessonsCompleted = [false,false,false,false];
+state.history = [];
+
+function toast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2600);
+}
+
+/* ============ SPLASH / LOADING ============ */
+document.getElementById('enterBtn').addEventListener('click', ()=>{
+  const splash=document.getElementById('splash');
+  splash.style.opacity='0';
+  setTimeout(()=>{
+    splash.style.display='none';
+    const loading=document.getElementById('loading');
+    loading.style.display='flex';
+    initLoadingParticles();
+    setTimeout(()=>{
+      loading.style.opacity='0';
+      loading.style.transition='opacity .6s ease';
+      setTimeout(()=>{
+        loading.style.display='none';
+        const app=document.getElementById('app');
+        app.style.display='block';
+        requestAnimationFrame(()=>app.classList.add('reveal'));
+        initHeroParticles();
+      },600);
+    },2600);
+  },600);
+});
+
+function initLoadingParticles(){
+  const canvas=document.getElementById('loadCanvas');
+  const ctx=canvas.getContext('2d');
+  function resize(){canvas.width=window.innerWidth;canvas.height=window.innerHeight;}
+  resize(); window.addEventListener('resize',resize);
+  const particles=Array.from({length:50},()=>({
+    x:Math.random()*canvas.width,y:Math.random()*canvas.height,
+    r:Math.random()*1.6+0.4, vy:-(Math.random()*0.4+0.1), o:Math.random()*0.5+0.1
+  }));
+  let raf;
+  function draw(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    particles.forEach(p=>{
+      p.y+=p.vy; if(p.y<0)p.y=canvas.height;
+      ctx.beginPath();
+      ctx.fillStyle=`rgba(139,0,0,${p.o})`;
+      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fill();
+    });
+    raf=requestAnimationFrame(draw);
+  }
+  draw();
+}
+
+function initHeroParticles(){
+  const canvas=document.getElementById('heroCanvas');
+  if(!canvas) return;
+  const ctx=canvas.getContext('2d');
+  function resize(){canvas.width=canvas.offsetWidth;canvas.height=canvas.offsetHeight;}
+  resize(); window.addEventListener('resize',resize);
+  const particles=Array.from({length:60},()=>({
+    x:Math.random()*canvas.width,y:Math.random()*canvas.height,
+    r:Math.random()*1.4+0.3, vx:(Math.random()-0.5)*0.15, vy:(Math.random()-0.5)*0.15,
+    o:Math.random()*0.4+0.08
+  }));
+  function draw(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    particles.forEach(p=>{
+      p.x+=p.vx; p.y+=p.vy;
+      if(p.x<0)p.x=canvas.width; if(p.x>canvas.width)p.x=0;
+      if(p.y<0)p.y=canvas.height; if(p.y>canvas.height)p.y=0;
+      ctx.beginPath();
+      ctx.fillStyle=`rgba(190,190,190,${p.o})`;
+      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+}
+
+/* ============ HEADER SCROLL / MOBILE MENU ============ */
+window.addEventListener('scroll',()=>{
+  const h=document.getElementById('siteHeader');
+  if(window.scrollY>30) h.classList.add('scrolled'); else h.classList.remove('scrolled');
+});
+const hamburgerBtn=document.getElementById('hamburgerBtn');
+const mobileMenu=document.getElementById('mobileMenu');
+const menuOverlay=document.getElementById('menuOverlay');
+hamburgerBtn.addEventListener('click',()=>{mobileMenu.classList.add('open');menuOverlay.classList.add('open');});
+menuOverlay.addEventListener('click',()=>{mobileMenu.classList.remove('open');menuOverlay.classList.remove('open');});
+
+/* ============ ROUTING ============ */
+document.body.addEventListener('click',(e)=>{
+  const el=e.target.closest('[data-page]');
+  if(el){
+    e.preventDefault();
+    const targetPage = el.getAttribute('data-page');
+    mobileMenu.classList.remove('open');menuOverlay.classList.remove('open');
+    if(targetPage==='dashboard' && !state.ownerPreview && !state.isSignedIn){
+      requireSignIn(targetPage);
+      return;
+    }
+    goToPage(targetPage);
+  }
+});
+
+/* ============ SIGN IN MODAL ============ */
+/* ⚠️ SETUP REQUIRED: Replace the value below with YOUR OWN Google OAuth Client ID.
+   Get one free at https://console.cloud.google.com/ → APIs & Services → Credentials
+   → Create Credentials → OAuth Client ID → Web application → add your real domain
+   under "Authorized JavaScript origins". Without this, Google will not sign anyone in. */
+const GOOGLE_CLIENT_ID = 'PASTE_YOUR_GOOGLE_CLIENT_ID_HERE.apps.googleusercontent.com';
+
+let pendingSigninPage = null;
+function requireSignIn(page){
+  pendingSigninPage = page;
+  document.getElementById('signinModal').classList.add('show');
+}
+
+function decodeJwt(token){
+  const base64 = token.split('.')[1].replace(/-/g,'+').replace(/_/g,'/');
+  const json = decodeURIComponent(atob(base64).split('').map(c=>'%'+('00'+c.charCodeAt(0).toString(16)).slice(-2)).join(''));
+  return JSON.parse(json);
+}
+
+function handleGoogleCredentialResponse(response){
+  const payload = decodeJwt(response.credential);
+  state.googleProfile = { name: payload.name, email: payload.email, picture: payload.picture };
+  state.isSignedIn = true;
+  renderProfileNav();
+  document.getElementById('signinModal').classList.remove('show');
+  toast(`Signed in as ${payload.name}`);
+  if(pendingSigninPage){ goToPage(pendingSigninPage); pendingSigninPage=null; }
+}
+
+window.addEventListener('load', ()=>{
+  if(GOOGLE_CLIENT_ID.includes('PASTE_YOUR') ){
+    document.getElementById('googleBtnFallbackMsg').style.display='block';
+    return;
+  }
+  if(window.google && google.accounts && google.accounts.id){
+    google.accounts.id.initialize({ client_id: GOOGLE_CLIENT_ID, callback: handleGoogleCredentialResponse });
+    google.accounts.id.renderButton(document.getElementById('googleBtnContainer'), { theme:'outline', size:'large', width:300, text:'signin_with' });
+  }
+});
+
+function renderProfileNav(){
+  const btn = document.getElementById('profileNavBtn');
+  if(state.isSignedIn && state.googleProfile){
+    const p = state.googleProfile;
+    const avatar = p.picture
+      ? `<img src="${p.picture}" class="profile-avatar-img" alt="${p.name}" referrerpolicy="no-referrer">`
+      : `<span class="profile-avatar" style="background:#8B0000">${p.name.split(' ').map(w=>w[0]).slice(0,2).join('').toUpperCase()}</span>`;
+    btn.innerHTML = `${avatar}<span class="profile-name">${p.name.split(' ')[0]}</span>`;
+    btn.classList.add('signed-in');
+  } else {
+    btn.innerHTML = 'Profile';
+    btn.classList.remove('signed-in');
+  }
+}
+document.getElementById('closeSigninBtn').addEventListener('click', ()=>{
+  document.getElementById('signinModal').classList.remove('show');
+  pendingSigninPage=null;
+});
+document.getElementById('signinModal').addEventListener('click',(e)=>{
+  if(e.target.id==='signinModal'){
+    document.getElementById('signinModal').classList.remove('show');
+    pendingSigninPage=null;
+  }
+});
+
+function goToPage(page, _isBack){
+  if(!_isBack){
+    if(navStack[navStack.length-1] !== page) navStack.push(page);
+  }
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+page).classList.add('active');
+  document.querySelectorAll('.main-nav a').forEach(a=>{
+    a.classList.toggle('active', a.getAttribute('data-page')===page);
+  });
+  state.page=page;
+  window.scrollTo({top:0,behavior:'smooth'});
+  if(page==='courses') renderCourseGrid('allCourseGrid', courses);
+  if(page==='videos') renderVideos();
+  if(page==='dashboard') renderDashboard('overview');
+  if(page==='faq') renderFaq();
+  updateBackBtn();
+}
+
+const navStack = ['home'];
+function goBack(){
+  if(navStack.length>1){
+    navStack.pop();
+    const prev = navStack[navStack.length-1];
+    goToPage(prev, true);
+  }
+}
+function updateBackBtn(){
+  const btn=document.getElementById('backFloatBtn');
+  if(!btn) return;
+  btn.style.display = navStack.length>1 ? 'flex' : 'none';
+}
+document.getElementById('backFloatBtn').addEventListener('click', goBack);
+
+/* ============ RENDER: FEATURES / COURSE CARDS ============ */
+function renderFeatures(){
+  document.getElementById('featureGrid').innerHTML = features.map(f=>`
+    <div class="glass-card" data-page="${f.page}">
+      ${icon(f.icon)}
+      <h3>${f.title}</h3>
+      <p>${f.desc}</p>
+    </div>`).join('');
+}
+
+function courseProgressPct(c){
+  const p = state.progress[c.id];
+  const done = p.lessonsCompleted.filter(Boolean).length;
+  return Math.round(done / c.lessons.length * 100);
+}
+function courseCompleted(c){
+  return state.progress[c.id].lessonsCompleted.every(Boolean) && state.progress[c.id].quizPassed;
+}
+function lastIncompleteLessonIndex(c){
+  const idx = state.progress[c.id].lessonsCompleted.findIndex(v=>!v);
+  return idx===-1 ? c.lessons.length-1 : idx;
+}
+
+function renderCourseGrid(targetId, list){
+  document.getElementById(targetId).innerHTML = list.map(c=>{
+    const pct = courseProgressPct(c);
+    const started = pct>0;
+    return `
+    <div class="course-card" data-course="${c.id}">
+      <div class="course-cover" style="${coverStyle(c)}">
+        ${coverHTML(c)}
+        <span class="badge ${c.premium?'premium':'free'}">${c.premium?'Premium':'Free'}</span>
+      </div>
+      <div class="course-body">
+        <h3>${c.title}</h3>
+        <p>${c.desc}</p>
+        <div class="course-meta"><span>${c.difficulty}</span><span>·</span><span>${c.lessons.length} Lessons</span><span>·</span><span>${c.time}</span></div>
+        ${started?`<div class="progress-track"><div class="progress-fill" style="width:${pct}%"></div></div><div style="font-size:11px;color:var(--grey);margin-bottom:12px;">${pct}% complete</div>`:''}
+        <button class="small-btn open-course" data-course="${c.id}">${started?'Continue Course':'Start Course'}</button>
+      </div>
+    </div>`;
+  }).join('');
+  document.querySelectorAll(`#${targetId} .course-card, #${targetId} .open-course`).forEach(el=>{
+    el.addEventListener('click',(e)=>{
+      e.stopPropagation();
+      openCourseDetail(el.getAttribute('data-course'));
+    });
+  });
+}
+
+function canAccessPremium(c){
+  return !c.premium || state.isPremiumMember || state.ownerPreview;
+}
+
+function openCourseDetail(courseId){
+  const c = courses.find(x=>x.id===courseId);
+  if(!canAccessPremium(c)){
+    toast('This is a Premium course — become a member to unlock it');
+    goToPage('membership');
+    return;
+  }
+  state.currentCourseId = courseId;
+  const pct = courseProgressPct(c);
+  const completed = courseCompleted(c);
+  document.getElementById('courseDetailBody').innerHTML = `
+    <div style="height:220px;border-radius:8px;${coverStyle(c)}display:flex;align-items:center;justify-content:center;margin-bottom:30px;border:1px solid var(--border);position:relative;overflow:hidden;">
+      <svg viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="1" stroke-linecap="round" stroke-linejoin="round" style="width:90px;height:90px;">${iconLibrary[(courseVisuals[c.id]||{icon:'book'}).icon]}</svg>
+      <span style="position:absolute;bottom:16px;right:20px;font-size:15px;font-weight:700;letter-spacing:2px;color:rgba(255,255,255,.18);font-family:'Space Grotesk';">AV</span>
+      <span class="badge ${c.premium?'premium':'free'}" style="top:16px;right:16px;">${c.premium?'Premium':'Free'}</span>
+    </div>
+    <div class="eyebrow">${c.difficulty} · ${c.lessons.length} Lessons · ${c.time}</div>
+    <h1 style="font-size:32px;margin:12px 0 16px;">${c.title}</h1>
+    <p style="color:var(--grey);font-weight:300;line-height:1.8;margin-bottom:26px;">${c.desc}</p>
+    ${pct>0?`<div class="progress-track"><div class="progress-fill" style="width:${pct}%"></div></div><div style="font-size:12px;color:var(--grey);margin-bottom:24px;">${pct}% complete</div>`:'<div style="margin-bottom:24px;"></div>'}
+    <button class="btn btn-primary" id="startCourseBtn" style="margin-bottom:40px;">${completed?'Read Again':(pct>0?'Continue Learning':'Start Course')}</button>
+    <div class="dash-section-title">Lessons</div>
+    <div id="lessonListWrap"></div>
+  `;
+  const prog = state.progress[c.id];
+  document.getElementById('lessonListWrap').innerHTML = c.lessons.map((l,i)=>{
+    const done = prog.lessonsCompleted[i];
+    const locked = i>0 && !prog.lessonsCompleted[i-1] && !done;
+    return `
+    <div class="lesson-history-row" style="cursor:${locked?'default':'pointer'};opacity:${locked?0.45:1};" data-lesson-idx="${i}">
+      <div>
+        <div class="lh-title">${i+1}. ${l.title}</div>
+        <div class="lh-course">${l.time} read</div>
+      </div>
+      <div class="status-pill" style="${done?'background:rgba(58,125,58,.2);color:#8fd18f;':locked?'background:rgba(255,255,255,.06);color:#888;':''}">${done?'Completed':locked?'Locked':'Available'}</div>
+    </div>`;
+  }).join('');
+  document.querySelectorAll('#lessonListWrap [data-lesson-idx]').forEach(row=>{
+    row.addEventListener('click',()=>{
+      const idx=parseInt(row.getAttribute('data-lesson-idx'));
+      const prog = state.progress[c.id];
+      const locked = idx>0 && !prog.lessonsCompleted[idx-1] && !prog.lessonsCompleted[idx];
+      if(locked) return;
+      openLesson(c.id, idx);
+    });
+  });
+  document.getElementById('startCourseBtn').addEventListener('click',()=>{
+    if(completed){ openLesson(c.id, 0); return; }
+    openLesson(c.id, lastIncompleteLessonIndex(c));
+  });
+  goToPage('courseDetail');
+}
+
+/* ============ LESSON READER ============ */
+function openLesson(courseId, index){
+  const c = courses.find(x=>x.id===courseId);
+  state.currentCourseId = courseId;
+  state.currentLessonIndex = index;
+  const l = c.lessons[index];
+  const prog = state.progress[c.id];
+  const done = prog.lessonsCompleted[index];
+  document.getElementById('lessonBody').innerHTML = `
+    <div class="lesson-top">
+      <div class="crumb">${c.title} · Lesson ${index+1} of ${c.lessons.length}</div>
+      <h1>${l.title}</h1>
+      <div class="lesson-meta-row">
+        <span>${l.time} read</span>
+        <span>·</span>
+        <span>${Math.round((index+1)/c.lessons.length*100)}% through course</span>
+      </div>
+    </div>
+    <div class="lesson-content">${l.content}</div>
+    <div class="lesson-nav">
+      <a class="nav-side ${index===0?'disabled':''}" id="prevLessonBtn">← Previous Lesson</a>
+      <button class="mark-complete ${done?'done':''}" id="markCompleteBtn">${done?'✓ Completed':'Mark as Completed'}</button>
+      <a class="nav-side ${index===c.lessons.length-1?'disabled':''}" id="nextLessonBtn">Next Lesson →</a>
+    </div>
+  `;
+  document.getElementById('markCompleteBtn').addEventListener('click',()=>{
+    if(prog.lessonsCompleted[index]) return;
+    prog.lessonsCompleted[index]=true;
+    state.history.unshift({lessonTitle:l.title, courseTitle:c.title, date:'Today'});
+    toast('Lesson marked as completed');
+    document.getElementById('markCompleteBtn').textContent='✓ Completed';
+    document.getElementById('markCompleteBtn').classList.add('done');
+    if(prog.lessonsCompleted.every(Boolean) && !prog.quizPassed){
+      toast('All lessons complete — launching final quiz');
+      setTimeout(()=>startQuiz(c.id),900);
+    }
+  });
+  if(index>0) document.getElementById('prevLessonBtn').addEventListener('click',()=>openLesson(courseId,index-1));
+  if(index<c.lessons.length-1) document.getElementById('nextLessonBtn').addEventListener('click',()=>openLesson(courseId,index+1));
+  goToPage('lesson');
+}
+
+/* ============ QUIZ ============ */
+function startQuiz(courseId){
+  state.quiz = { answers:[], current:0, courseId };
+  renderQuizQuestion();
+  goToPage('quiz');
+}
+function renderQuizQuestion(){
+  const c = courses.find(x=>x.id===state.quiz.courseId);
+  const questions = buildQuiz(c);
+  const i = state.quiz.current;
+  const q = questions[i];
+  document.getElementById('quizBody').innerHTML = `
+    <div class="quiz-progress">${c.title} · Question ${i+1} of ${questions.length}</div>
+    <div class="quiz-q">${q.q}</div>
+    <div id="optsWrap">
+      ${q.opts.map((o,oi)=>`<button class="quiz-opt" data-opt="${oi}">${o}</button>`).join('')}
+    </div>
+  `;
+  document.querySelectorAll('#optsWrap .quiz-opt').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const chosen = parseInt(btn.getAttribute('data-opt'));
+      document.querySelectorAll('#optsWrap .quiz-opt').forEach(b=>b.style.pointerEvents='none');
+      btn.classList.add(chosen===q.a?'correct':'wrong');
+      if(chosen!==q.a){
+        document.querySelector(`#optsWrap [data-opt="${q.a}"]`).classList.add('correct');
+      }
+      state.quiz.answers.push(chosen===q.a);
+      setTimeout(()=>{
+        if(i+1<questions.length){
+          state.quiz.current++;
+          renderQuizQuestion();
+        } else {
+          finishQuiz(c);
+        }
+      },900);
+    });
+  });
+}
+function finishQuiz(c){
+  const correct = state.quiz.answers.filter(Boolean).length;
+  const total = state.quiz.answers.length;
+  const pct = Math.round(correct/total*100);
+  const pass = pct>=50;
+  const prog = state.progress[c.id];
+  prog.quizScore = pct;
+  prog.quizPassed = pass;
+  document.getElementById('quizBody').innerHTML = `
+    <div class="quiz-result ${pass?'pass':''}">
+      <div class="big-score">${pct}%</div>
+      <p style="color:var(--grey);margin-bottom:30px;">${correct} of ${total} correct</p>
+      ${pass?`
+        <h2 style="margin-bottom:10px;">Congratulations!</h2>
+        <p style="color:var(--grey);font-weight:300;margin-bottom:34px;">You successfully completed ${c.title}.</p>
+        <div class="cta-row">
+          <button class="btn btn-primary" onclick="goToPage('dashboard');renderDashboard('overview')">Back to Dashboard</button>
+          <button class="btn btn-outline" onclick="goToPage('courses');renderCourseGrid('allCourseGrid',courses)">Explore More Courses</button>
+        </div>`
+        :`
+        <p style="color:var(--grey);font-weight:300;margin-bottom:34px;">You need 50% to pass. Give it another go — unlimited retries.</p>
+        <button class="btn btn-primary" onclick="startQuiz('${c.id}')">Retake Quiz</button>`
+      }
+    </div>
+  `;
+  if(pass) toast('Course completed — congratulations!');
+}
+function mockCheckout(){
+  state.isPremiumMember = true;
+  toast('Welcome to Alpha Veil Premium — everything is now unlocked (demo checkout, no real payment processed)');
+  renderCourseGrid('homeCourseGrid', courses.slice(0,3));
+}
+
+/* ============ DASHBOARD ============ */
+function renderDashboard(tab){
+  document.querySelectorAll('#dashSidebar a[data-dash]').forEach(a=>{
+    a.classList.toggle('active', a.getAttribute('data-dash')===tab);
+  });
+  const totalLessons = courses.reduce((s,c)=>s+c.lessons.length,0);
+  const completedLessons = courses.reduce((s,c)=>s+state.progress[c.id].lessonsCompleted.filter(Boolean).length,0);
+  const completedCourses = courses.filter(courseCompleted).length;
+  const inProgress = courses.filter(c=>{const p=courseProgressPct(c);return p>0 && !courseCompleted(c);});
+
+  if(tab==='overview'){
+    const p = state.googleProfile;
+    const dashAvatar = p ? (p.picture
+      ? `<img src="${p.picture}" class="profile-avatar-img large" alt="${p.name}" referrerpolicy="no-referrer">`
+      : `<span class="profile-avatar large" style="background:#8B0000">${p.name.split(' ').map(w=>w[0]).slice(0,2).join('').toUpperCase()}</span>`) : '';
+    document.getElementById('dashMain').innerHTML = `
+      ${p?`<div style="display:flex;align-items:center;gap:14px;margin-bottom:6px;">
+        ${dashAvatar}
+        <div><h1 style="margin-bottom:2px;">Welcome back, ${p.name.split(' ')[0]}</h1><div style="font-size:12px;color:var(--grey);">${p.email}</div></div>
+      </div>`:`<h1>Welcome back</h1>`}
+      <p class="dash-sub">Here's where you left off.</p>
+      <div class="stat-grid">
+        <div class="stat-card"><div class="num">${completedLessons}/${totalLessons}</div><div class="lbl">Lessons Completed</div></div>
+        <div class="stat-card"><div class="num">${completedCourses}</div><div class="lbl">Courses Completed</div></div>
+        <div class="stat-card"><div class="num">${inProgress.length}</div><div class="lbl">In Progress</div></div>
+        <div class="stat-card"><div class="num">Free</div><div class="lbl">Membership</div></div>
+      </div>
+      <div class="dash-section-title">Continue Learning</div>
+      <div class="course-grid" id="continueGrid" style="margin-bottom:50px;"></div>
+      <div class="dash-section-title">Recent Activity</div>
+      <div id="recentActivity"></div>
+    `;
+    renderCourseGrid('continueGrid', inProgress.length? inProgress : courses.slice(0,1));
+    document.getElementById('recentActivity').innerHTML = state.history.slice(0,4).map(h=>`
+      <div class="lesson-history-row">
+        <div><div class="lh-title">${h.lessonTitle}</div><div class="lh-course">${h.courseTitle}</div></div>
+        <div class="lh-date">${h.date}</div>
+      </div>`).join('') || '<p style="color:var(--grey);font-size:13px;">No activity yet — start a lesson to see it here.</p>';
+  }
+  if(tab==='mycourses'){
+    document.getElementById('dashMain').innerHTML = `<h1>My Courses</h1><p class="dash-sub">Everything you've started.</p><div class="course-grid" id="myCoursesGrid"></div>`;
+    const started = courses.filter(c=>courseProgressPct(c)>0);
+    renderCourseGrid('myCoursesGrid', started.length?started:courses);
+  }
+  if(tab==='completed'){
+    const done = courses.filter(courseCompleted);
+    document.getElementById('dashMain').innerHTML = `<h1>Completed Courses</h1><p class="dash-sub">Reread anytime — nothing ever locks again.</p><div class="course-grid" id="completedGrid"></div>`;
+    if(done.length){
+      renderCourseGrid('completedGrid', done);
+    } else {
+      document.getElementById('completedGrid').innerHTML = `<p style="color:var(--grey);font-size:13px;">No completed courses yet — finish a course and its final quiz to see it here.</p>`;
+    }
+  }
+  if(tab==='history'){
+    document.getElementById('dashMain').innerHTML = `<h1>Lesson History</h1><p class="dash-sub">Every lesson you've ever completed, permanently.</p><div id="fullHistory"></div>`;
+    document.getElementById('fullHistory').innerHTML = state.history.map(h=>`
+      <div class="lesson-history-row">
+        <div><div class="lh-title">${h.lessonTitle}</div><div class="lh-course">${h.courseTitle}</div></div>
+        <div class="lh-date">${h.date}</div>
+      </div>`).join('') || '<p style="color:var(--grey);font-size:13px;">Nothing completed yet.</p>';
+  }
+}
+document.getElementById('dashSidebar').addEventListener('click',(e)=>{
+  const el=e.target.closest('[data-dash]');
+  if(el){e.preventDefault();renderDashboard(el.getAttribute('data-dash'));}
+});
+
+/* ============ FAQ ============ */
+const faqs = [
+  {q:'How is Alpha Veil different from a blog?',a:'Content is organized into structured courses with sequential lessons and a single closing quiz, rather than scattered standalone articles.'},
+  {q:'Do completed lessons ever get locked again?',a:'No. Once completed, a lesson stays permanently accessible in your history.'},
+  {q:'How many attempts do I get on a quiz?',a:'Unlimited. If you fail, you can retake it as many times as you need.'},
+  {q:'Do you offer certificates?',a:'No — Alpha Veil is focused purely on learning and mastery, not credentialing.'},
+];
+function renderFaq(){
+  document.getElementById('faqList').innerHTML = faqs.map((f,i)=>`
+    <div style="border-bottom:1px solid var(--border);">
+      <button class="faq-q" data-i="${i}" style="width:100%;text-align:left;background:none;border:none;color:var(--white);padding:20px 0;font-size:15px;font-weight:500;display:flex;justify-content:space-between;align-items:center;">
+        ${f.q} <span style="color:var(--dark-red);font-size:20px;">+</span>
+      </button>
+      <div class="faq-a" id="faq-a-${i}" style="max-height:0;overflow:hidden;transition:max-height .35s ease;color:var(--grey);font-size:14px;font-weight:300;line-height:1.7;">
+        <p style="padding-bottom:20px;">${f.a}</p>
+      </div>
+    </div>`).join('');
+  document.querySelectorAll('.faq-q').forEach(btn=>{
+    btn.addEventListener('click',()=>{
+      const a=document.getElementById('faq-a-'+btn.getAttribute('data-i'));
+      const open = a.style.maxHeight && a.style.maxHeight!=='0px';
+      document.querySelectorAll('.faq-a').forEach(x=>x.style.maxHeight='0px');
+      a.style.maxHeight = open? '0px' : a.scrollHeight+'px';
+    });
+  });
+}
+
+function submitContact(e){
+  e.preventDefault();
+  toast('Message sent — we will get back to you soon');
+  e.target.reset();
+  return false;
+}
+
+/* ============ THEME ============ */
+function setTheme(mode){
+  document.body.classList.toggle('light-theme', mode==='light');
+  document.querySelectorAll('.theme-opt').forEach(b=>{
+    b.classList.toggle('active', b.getAttribute('data-theme')===mode);
+  });
+}
+document.getElementById('themeDarkBtn').addEventListener('click',()=>setTheme('dark'));
+document.getElementById('themeLightBtn').addEventListener('click',()=>setTheme('light'));
+setTheme('dark');
+
+function setOwnerPreview(on){
+  state.ownerPreview = on;
+  document.getElementById('ownerOnBtn').classList.toggle('active', on);
+  document.getElementById('ownerOffBtn').classList.toggle('active', !on);
+  toast(on ? 'Owner preview enabled — Premium courses unlocked for you' : 'Owner preview disabled');
+}
+document.getElementById('ownerOnBtn').addEventListener('click',()=>setOwnerPreview(true));
+document.getElementById('ownerOffBtn').addEventListener('click',()=>setOwnerPreview(false));
+
+/* ============ INIT ============ */
+renderFeatures();
+renderCourseGrid('homeCourseGrid', courses.slice(0,3));
+</script>
+</body>
+</html>
